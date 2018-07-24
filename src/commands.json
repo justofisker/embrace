@@ -1,0 +1,135 @@
+[
+  {
+    "name": "Help",
+    "usage": "[command]",
+    "group": "Bot",
+    "footer": "Command help",
+    "description": "List of commands or information on a specific command.",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": true
+  },
+  {
+    "name": "Ping",
+    "usage": "",
+    "group": "Bot",
+    "footer": "Last checked",
+    "description": "Pong! (also the latency)",
+    "aliases": [ "p" ],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Invite",
+    "usage": "",
+    "group": "Bot",
+    "footer": "Invite link",
+    "description": "A link to invite me to your server.",
+    "aliases": [],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Cat",
+    "usage": "",
+    "group": "Fun",
+    "footer": "Random cat",
+    "description": "A random cat.",
+    "aliases": [ "kitty", "cedar" ],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Dog",
+    "usage": "",
+    "group": "Fun",
+    "footer": "Random dog",
+    "description": "A random dog.",
+    "aliases": [ "pupper", "puppy" ],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Embrace",
+    "usage": "[user]",
+    "group": "Fun",
+    "footer": "Embrace",
+    "description": "An embrace.",
+    "aliases": [],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "8Ball",
+    "usage": "<question>",
+    "group": "Fun",
+    "footer": "Eight ball",
+    "description": "A Magical 8-Ball on which to base important life decisions.",
+    "aliases": [ "magic8", "magic8ball" ],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Coin",
+    "usage": "",
+    "group": "Fun",
+    "footer": "Coin flip",
+    "description": "A coin flip for the most important decisions.",
+    "aliases": [ "flip" ],
+    "can_disable": true,
+    "allow_dm": true
+  },
+  {
+    "name": "Prefix",
+    "usage": "",
+    "group": "Server",
+    "footer": "Server prefix",
+    "description": "The server's current prefix.",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": false
+  },
+  {
+    "name": "Set",
+    "usage": "[option] [value]",
+    "group": "Server",
+    "footer": "Server options",
+    "description": "Configure your server's options.",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": false,
+    "permissions": [ "MANAGE_GUILD" ]
+  },
+  {
+    "name": "Enable",
+    "usage": "[command]",
+    "group": "Server",
+    "footer": "Enable command",
+    "description": "Enable a disabled command.",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": false,
+    "permissions": [ "MANAGE_GUILD" ]
+  },
+  {
+    "name": "Disable",
+    "usage": "[command]",
+    "group": "Server",
+    "footer": "Disable command",
+    "description": "Disable an enabled command..",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": false,
+    "permissions": [ "MANAGE_GUILD" ]
+  },
+  {
+    "name": "Stop",
+    "usage": "",
+    "group": "Hidden",
+    "footer": "",
+    "description": "Stop the bot.",
+    "aliases": [],
+    "can_disable": false,
+    "allow_dm": true
+  }
+]

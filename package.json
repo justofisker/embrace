@@ -1,0 +1,15 @@
+{
+  "name": "embrace",
+  "version": "1.0.0",
+  "description": "An open-source multipurpose Discord bot",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "MsDiana",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "fs": "0.0.1-security",
+    "request": "2.87.0"
+  }
+}
