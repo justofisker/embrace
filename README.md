@@ -5,13 +5,13 @@ An open-source multipurpose Discord bot
 
 Name | Parameter | Aliases | Can Disable* | User Permission Needed
 --- | --- | --- | --- | ---
-Help | [command] | | Yes |
+Help | [command] | | No |
 Ping | | p | Yes |
 Invite | | | Yes |
 Cat | | kitty, cedar | Yes |
 Dog | | puppy, pupper | Yes |
 Embrace | [user] | | Yes |
-8Ball | <question> | magic8, magic8ball | Yes |
+8Ball | \<question\> | magic8, magic8ball | Yes |
 Coin | | flip | Yes |
 Prefix | | | No |
 Set | [option] [value] | | No | MANAGE_GUILD
