@@ -1,3 +1,4 @@
+const Parses = require('./parses.js');
 
 exports.setOption = function (iServer, sOption, value) {
   if(iServer !== -1) {
@@ -33,13 +34,26 @@ exports.spliceOption = function (iServer, sOption, iPosition, iAmount = 1) {
     return -1;
 }
 
+exports.getOption = function (iServer, sOption) {
+  var server = iServer;
+  if(server >= servers.length)
+    server = -1;
+  if(server === -1)
+    return Parses.Option(sOption).value.default;
+  else
+    return (typeof servers[server][sOption] === 'undefined') ? Parses.Option(sOption).value.default : servers[server][sOption];
+}
+
 exports.createServer = function (sID) {
   return servers.push({ id: sID }) - 1;
 }
 
+// Code line and code blocks not supported
 String.prototype.toSafe = function () {
   return this.replace('\\\\\\*', '*')
     .replace('\\*', '\\*')
+    .replace('\\_', '_')
+    .replace('_', '\\_')
     .replace('\\\\`', '`')
     .replace('`', '\\`')
     .replace('\\\\~', '~')

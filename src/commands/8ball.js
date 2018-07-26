@@ -4,7 +4,7 @@ exports.Run = function (message, cmd) {
   rEmbed = new Discord.RichEmbed;
   rEmbed.setFooter(cmd.Command.footer, client.user.avatarURL)
     .setColor(0xCD77F4);
-  if(cmd.sArgumentString === '') {
+  if(cmd.aArguments.length === 0) {
     rEmbed.setTitle('Ask a question')
       .setDescription('You need to ask a question to the Magic 8-Ball.');
   } else {

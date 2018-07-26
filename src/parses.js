@@ -1,5 +1,6 @@
 const settings = require('./settings.json');
 const commands = require('./commands.json');
+const options  = require('./options.json');
 
 exports.Command = function (sCommand) {
   var iCommand = -1
@@ -23,6 +24,7 @@ exports.Command = function (sCommand) {
 }
 
 exports.Arguments = function (sArguments) {
+  // TODO: Add support for arguments in quotes to stay as one arg
   var aArguments = sArguments.split(' ');
   for(var i = 0; i < aArguments.length; i++) {
     if(aArguments[i] === '') {
@@ -34,6 +36,8 @@ exports.Arguments = function (sArguments) {
 }
 
 exports.Message = function (message) {
+  if(message.author.bot)
+    return null;
   var iServer = -1
       sPrefix = ''
       sWorking = '';
@@ -129,45 +133,36 @@ exports.Message = function (message) {
 }
 
 exports.User = function (channel, sUser) {
-  if(sUser.startsWith('<@')) {
-    var sWorking = sUser.substr(2);
-    if(sWorking.startsWith('!'))
-      sWorking = sWorking.substr(1);
-    if(sWorking.endsWith('>')) {
-      sWorking = sWorking.substr(0, sWorking.length - 1);
-      if(!isNaN(sWorking)) {
-        var user = null;
-        if(channel.type === 'text') { // Server Text Channel
-          channel.members.some(function (member) {
-            if(member.id === sWorking) {
-              user = member.user;
-              return true;
-            }
-          });
-        } else { // DM Channel
-          if(client.user.id === sWorking)
-            user = client.user;
-          else if (channel.recipient.id === sWorking)
-            user = channel.recipient;
+  if(/<@!?\d+>/.test(sUser)) {
+    sUserID = sUser.substr(2, sUser.length - 3);
+    if(sUserID.startsWith('!'))
+      sUserID = sUserID.substr(1);
+    var user = null;
+    if(channel.type !== 'dm') { // Not DM Channel (text or voice)
+      channel.members.some(function (member) {
+        if(member.id === sUserID) {
+          user = member.user;
+          return true;
         }
-        return user;
-      }
+      });
+    } else { // DM Channel
+      if(client.user.id === sWorking)
+        user = client.user;
+      else if (channel.recipient.id === sWorking)
+        user = channel.recipient;
     }
+    return user;
   } else {
       var user = null;
-      if(channel.type === 'text') { // Server Text Channel
+      if(channel.type !== 'dm') { // Not DM Channel (text or voice)
         channel.members.some(function (member) {
           if(member.id === sUser || member.user.username.toLowerCase() === sUser.toLowerCase()) {
             user = member.user;
             return true;
           }
-          if(member.nickname) {
+          if(member.nickname)
             if(member.nickname.toLowerCase() === sUser.toLowerCase())
-            {
               user = member.user;
-              return true;
-            }
-          }
         });
       } else { // DM Channel
         if(client.user.id === sUser || client.user.username.toLowerCase() === sUser.toLowerCase())
@@ -181,28 +176,60 @@ exports.User = function (channel, sUser) {
 }
 
 exports.Channel = function (guild, sChannel, sType = 'text') {
-  if(sChannel.startsWith('<#')) {
-    var sWorking = sChannel.substr(2);
-    if(sWorking.endsWith('>')) {
-      sWorking = sWorking.substr(0, sWorking.length - 1);
-      if(!isNaN(sWorking)) {
-        var out = null;
-        guild.channels.some(function(channel) {
-          if(channel.type === sType && channel.id === sWorking) {
-            out = channel;
-            return true;
-          }
-        });
-        return out;
-      }
-    }
-  } else {
+  if(/<#\d+>/.test(sChannel)) {
+    var sChannelID = sChannel.substr(2, sChannel.length - 3);
     var out = null;
-    guild.channels.some(function (channel) {
-      if(channel.id === sChannel || channel.name === sChannel.toLowerCase()) {
+    guild.channels.some(function(channel) {
+      if(channel.type === sType && channel.id === sChannelID) {
         out = channel;
         return true;
       }
+    });
+      return out;
+  } else {
+    var out = null;
+    guild.channels.some(function (channel) {
+      if(channel.id === sChannel) {
+        out = channel;
+        return true;
+      }
+      if(channel.name === sChannel.toLowerCase())
+        out = channel;
+    });
+    return out;
+  }
+  return null;
+}
+
+exports.Option = function (sOption) {
+  for(var i = 0; i < options.length; i++) {
+    if(options[i].parameter === sOption.toLowerCase()) {
+      return options[i];
+    }
+  }
+  return null;
+}
+
+exports.Role = function (guild, sRole) {
+  if(/<@&\d+>/.test(sRole)) {
+    var sRoleID = sRole.substr(3, sRole.length - 4);
+    var out = null;
+    guild.roles.some(function (role) {
+      if(role.id === sRoleID)
+      {
+        out = role;
+        return true;
+      }
+    });
+    return out;
+  } else {
+    var out = null;
+    guild.roles.some(function (role) {
+      if(role.id === sRole) {
+        out = role;
+        return true;
+      } else if(role.name.toLowerCase() === sRole.toLowerCase())
+        out = role;
     });
     return out;
   }

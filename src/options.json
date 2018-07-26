@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Prefix",
+    "parameter": "prefix",
+    "description": "The prefix used before this bot's commands.",
+    "value": {
+      "name": "prefix",
+      "type": "argument",
+      "regexp": "[a-z0-9!-&,.;]+",
+      "lowercase": true,
+      "default": "!"
+    }
+  },
+  {
+    "name": "Welcome Channel",
+    "parameter": "wc",
+    "description": "The channel that the bots welcomes new members in.",
+    "value": {
+      "name": "wc",
+      "type": "channel",
+      "default": null
+    }
+  }
+]
