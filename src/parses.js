@@ -133,7 +133,7 @@ exports.Message = function (message) {
 }
 
 exports.User = function (channel, sUser) {
-  if(/<@!?\d+>/.test(sUser)) {
+  if(/^<@!?\d+>$/.test(sUser)) {
     sUserID = sUser.substr(2, sUser.length - 3);
     if(sUserID.startsWith('!'))
       sUserID = sUserID.substr(1);
@@ -176,7 +176,7 @@ exports.User = function (channel, sUser) {
 }
 
 exports.Channel = function (guild, sChannel, sType = 'text') {
-  if(/<#\d+>/.test(sChannel)) {
+  if(/^<#\d+>$/.test(sChannel)) {
     var sChannelID = sChannel.substr(2, sChannel.length - 3);
     var out = null;
     guild.channels.some(function(channel) {
@@ -211,7 +211,7 @@ exports.Option = function (sOption) {
 }
 
 exports.Role = function (guild, sRole) {
-  if(/<@&\d+>/.test(sRole)) {
+  if(/^<@&\d+>$/.test(sRole)) {
     var sRoleID = sRole.substr(3, sRole.length - 4);
     var out = null;
     guild.roles.some(function (role) {

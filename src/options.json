@@ -6,7 +6,7 @@
     "value": {
       "name": "prefix",
       "type": "argument",
-      "regexp": "[a-z0-9!-&,.;]+",
+      "regexp": "^[a-z0-9!-&,.;]+$",
       "lowercase": true,
       "default": "!"
     }
